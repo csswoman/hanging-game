@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
-import { letters } from './helpers/letters'
 import { HangImage } from './components/HangImage'
+import { letters } from './helpers/letters'
+import { getRandomWord } from './helpers/getRandomWord'
 import './App.css'
 
 function App() {
   
-  const [ word ]= useState('COMPUTADORA');
+  const [ word ]= useState( getRandomWord() );
   const [ hiddenWord, setHiddenWord ] = useState( '_ '.repeat( word.length ) );
   const [ attemtps, setAttempts ] = useState(0);
   const [ lose, setLose ] = useState ( false );
@@ -29,6 +30,7 @@ function App() {
   const checkLetter = ( letter: string ) => {
 
     if ( lose ) return;
+    if ( won ) return;
 
     if ( !word.includes(letter) ) {
       setAttempts ( Math.min ( attemtps + 1, 9 ) );
