@@ -6,7 +6,7 @@ import './App.css'
 
 function App() {
   
-  const [ word ]= useState( getRandomWord() );
+  const [ word, setWord ]= useState( getRandomWord() );
   const [ hiddenWord, setHiddenWord ] = useState( '_ '.repeat( word.length ) );
   const [ attemtps, setAttempts ] = useState(0);
   const [ lose, setLose ] = useState ( false );
@@ -48,6 +48,15 @@ function App() {
     setHiddenWord( hiddenWordArray.join(' ') );
   }
 
+  const newGame = () => {
+    const newWord = getRandomWord();
+
+    setWord ( newWord );
+    setHiddenWord ( '_ '.repeat( newWord.length ) );
+    setLose ( false );
+    setWon ( false );
+  }
+
   return (
     <div className="App">
       <h1>Hanging game</h1>
@@ -79,6 +88,11 @@ function App() {
               </button>
           ))
         }
+
+        <br />
+        <br />
+
+        <button onClick={ newGame }> ¿Nuevo juego? </button>
     </div>
   )
 }
